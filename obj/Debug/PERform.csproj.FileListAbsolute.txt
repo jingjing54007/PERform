@@ -20,3 +20,20 @@ C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Deb
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.exe
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.pdb
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\App.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\App.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform_MarkupCompile.cache
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform_MarkupCompile.lref
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.exe
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.pdb
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\PERform.exe.config
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\PERform.exe
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\PERform.pdb
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\App.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.g.resources
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.Properties.Resources.resources
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csproj.GenerateResource.Cache
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\MainWindow.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\MainWindow.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache

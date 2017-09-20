@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\
 PERform
 none
 false
 DEBUG;TRACE
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\App.xaml
-21649901428
+C:\Users\Adam\Documents\GitHub\PERform\App.xaml
+21929252359
 
-13-457636239
-1551014762
-MainWindow.xaml;Views\Home.xaml;
+14290456527
+15244697420
+Views\MainWindow.xaml;Views\ModifierView.xaml;
 
-True
+False
 

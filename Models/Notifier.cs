@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace PERform.Models
 {
-    class Notifier : INotifyPropertyChanged
+    public class Notifier : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
