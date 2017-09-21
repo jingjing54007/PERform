@@ -6,13 +6,9 @@ C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\bin\Deb
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\MainWindow.g.cs
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\Home.g.cs
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\App.g.cs
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform_MarkupCompile.cache
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform_MarkupCompile.lref
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\MainWindow.baml
-C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\Home.baml
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.g.resources
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.Properties.Resources.resources
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\PERform.csproj.GenerateResource.Cache
@@ -37,3 +33,9 @@ C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\MainWindow.baml
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.g.cs
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.baml
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\HomeView.g.cs
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\MainWindow.g.cs
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\ModifierView.g.cs
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\HomeView.baml
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\MainWindow.baml
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\ModifierView.baml

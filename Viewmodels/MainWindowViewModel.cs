@@ -16,6 +16,7 @@ namespace PERform.Viewmodels
 
         public MainWindowViewModel()
         {
+            PageContent = new HomeView();
             InitializeCommands();
         }
 
@@ -45,6 +46,10 @@ namespace PERform.Viewmodels
             if (parameter == "Modifier")
             {
                 PageContent = new ModifierView();
+            }
+            else if (parameter == "Home")
+            {
+                PageContent = new HomeView();
             }
 
             DrawerHost.CloseDrawerCommand.Execute(null, null);

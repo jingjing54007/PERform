@@ -12,9 +12,10 @@
         <materialDesign:DrawerHost.LeftDrawerContent>
             <StackPanel Width="200">
                 <ToggleButton Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}" HorizontalAlignment="Right" Margin="15"/>
+                <Button Content="Home" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Home"/>
                 <Button Content="Modifier" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Modifier"/>
-                <Button Content="Checker" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False"/>
-                <Button Content="Parser" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False"/>
+                <Button Content="Checker" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Checker"/>
+                <Button Content="Parser" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Parser"/>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
