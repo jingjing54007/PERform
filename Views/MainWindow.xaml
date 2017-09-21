@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:PERform"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -10,19 +11,28 @@
 
     <materialDesign:DrawerHost x:Name="DrawerHost" IsLeftDrawerOpen="{Binding IsLeftDrawerOpen}">
         <materialDesign:DrawerHost.LeftDrawerContent>
-            <StackPanel Width="200">
-                <ToggleButton Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}" HorizontalAlignment="Right" Margin="15"/>
-                <Button Content="Home" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Home"/>
-                <Button Content="Modifier" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Modifier"/>
-                <Button Content="Checker" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Checker"/>
-                <Button Content="Parser" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Parser"/>
-            </StackPanel>
+            <DockPanel Width="200" LastChildFill="False">
+                <ToggleButton Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}" HorizontalAlignment="Right" Margin="15" DockPanel.Dock="Top"/>
+                <Button Content="Home" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Home" DockPanel.Dock="Top"/>
+                <Button Content="Modifier" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Modifier" DockPanel.Dock="Top"/>
+                <Button Content="Checker" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Checker" DockPanel.Dock="Top"/>
+                <Button Content="Parser" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Parser" DockPanel.Dock="Top"/>
+                <Button Content="About DEV" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="AboutDEV" Margin="0,0,0,15" DockPanel.Dock="Bottom"/>
+            </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
-        <DockPanel>
-            <materialDesign:ColorZone Padding="15" materialDesign:ShadowAssist.ShadowDepth="Depth2" Mode="PrimaryMid" DockPanel.Dock="Top">
+        <DockPanel LastChildFill="False">
+            <materialDesign:ColorZone Padding="15" materialDesign:ShadowAssist.ShadowDepth="Depth2" Mode="PrimaryMid"  DockPanel.Dock="Top">
                 <DockPanel>
                     <ToggleButton x:Name="MenuToggleButton" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Text="PERform"/>
+                    <TextBlock FontSize="22" Text="PERform" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Text="{Binding TextBoxText}" materialDesign:HintAssist.Hint=".ph file" materialDesign:HintAssist.IsFloating="True" Width="150" VerticalAlignment="Center" DockPanel.Dock="Right">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding MouseDown}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <materialDesign:PackIcon Kind="File" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Width="20" Height="20" DockPanel.Dock="Right"/>
                 </DockPanel>
             </materialDesign:ColorZone>
             <ContentControl Content="{Binding PageContent, Mode=OneWay}"/>

@@ -32,10 +32,17 @@ C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\MainWindow.g.cs
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\MainWindow.baml
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.g.cs
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\ModifierView.baml
-C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\HomeView.g.cs
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\MainWindow.g.cs
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\ModifierView.g.cs
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\HomeView.baml
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\MainWindow.baml
 C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\ModifierView.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\HomeView.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\HomeView.baml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\AboutDEVView.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\AboutDEVView.baml
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\MaterialDesignColors.dll
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache
