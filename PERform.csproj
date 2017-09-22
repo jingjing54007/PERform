@@ -69,6 +69,7 @@
     <Compile Include="Viewmodels\HomeViewModel.cs" />
     <Compile Include="Viewmodels\MainWindowViewModel.cs" />
     <Compile Include="Viewmodels\ModifierViewModel.cs" />
+    <Compile Include="Viewmodels\SnippetsViewModel.cs" />
     <Compile Include="Views\AboutDEVView.xaml.cs">
       <DependentUpon>AboutDEVView.xaml</DependentUpon>
     </Compile>
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="Views\ModifierView.xaml.cs">
       <DependentUpon>ModifierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SnippetsView.xaml.cs">
+      <DependentUpon>SnippetsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AboutDEVView.xaml">
       <SubType>Designer</SubType>
@@ -99,6 +103,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ModifierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SnippetsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

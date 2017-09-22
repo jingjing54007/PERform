@@ -72,6 +72,10 @@ namespace PERform.Viewmodels
             {
                 PageContent = new AboutDEVView();
             }
+            else if (parameter == "Snippets")
+            {
+                PageContent = new SnippetsView();
+            }
 
             DrawerHost.CloseDrawerCommand.Execute(null, null);
         }

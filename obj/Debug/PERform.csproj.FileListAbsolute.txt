@@ -46,3 +46,9 @@ C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\MaterialDesignColors.dll
 C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\MaterialDesignColors.pdb
 C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\AboutDEVView.g.cs
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\AboutDEVView.baml
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\SnippetsView.g.cs
+C:\Users\Pracownik\Documents\Visual Studio 2017\Projects\PERform\PERform\obj\Debug\Views\SnippetsView.baml
