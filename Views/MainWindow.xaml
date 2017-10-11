@@ -21,7 +21,7 @@
                 <Button Content="About DEV" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="AboutDEV" Margin="0,0,0,15" DockPanel.Dock="Bottom"/>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
-        <DockPanel LastChildFill="False">
+        <DockPanel>
             <materialDesign:ColorZone Padding="15" materialDesign:ShadowAssist.ShadowDepth="Depth2" Mode="PrimaryMid"  DockPanel.Dock="Top">
                 <DockPanel>
                     <ToggleButton x:Name="MenuToggleButton" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"/>
