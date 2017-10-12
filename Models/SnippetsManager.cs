@@ -11,26 +11,47 @@ namespace PERform.Models
     {
         public SnippetsManager()
         {
-            SnippetsCollection = new ObservableCollection<Snippet>();
-
-            SnippetsCollection.Add(new Snippet("General", true));
+            SnippetsCollection = new ObservableCollection<SnippetParent>();
         }
 
-        public ObservableCollection<Snippet> SnippetsCollection { get; set; }
+        public ObservableCollection<SnippetParent> SnippetsCollection { get; set; }
 
-        public void Add(Snippet parentSnippet, string newHeader)
+        public void Add(ISnippet snippet, string header)
         {
-            parentSnippet.Snippets.Add(new Snippet(newHeader, true));
+            if (snippet is SnippetParent)
+            {
+                var parentSnippet = snippet as SnippetParent;
+                parentSnippet.Childrens.Add(new SnippetChild() { Header = header });
+            }
+            else
+            {
+                SnippetsCollection.Add(new SnippetParent() { Header = header });
+            }
         }
 
-        public void Rename(Snippet snippet, string newHeader)
+        public void Rename(ISnippet snippet, string newHeader)
         {
-            snippet?.Rename(newHeader);
+            snippet.Rename(newHeader);
         }
 
-        public void Remove(Snippet snippet)
+        public void Remove(ISnippet snippet)
         {
-            // TODO
+            if (snippet is SnippetParent)
+            {
+                SnippetsCollection.Remove(snippet as SnippetParent);
+            }
+            else
+            {
+                var snippetChild = snippet as SnippetChild;
+                var snippetParent = (from snip in SnippetsCollection
+                                    where snip.Childrens.Contains(snippetChild)
+                                    select snip).FirstOrDefault();
+
+                if (!snippetParent.Equals(null))
+                {
+                    snippetParent.Childrens.Remove(snippetChild);
+                }
+            }
         }
     }
 }

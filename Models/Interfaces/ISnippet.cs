@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PERform.Models
 {
-    class TreeViewItemHeader
+    public interface ISnippet
     {
+        string Header { get; set; }
+        PEREditor PerEditor { get; }
+
+        void Rename(string newHeader);
     }
 }

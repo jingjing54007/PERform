@@ -37,7 +37,7 @@ namespace PERform.Viewmodels
 
         #region Properties
         public SnippetsManager SnippetsManager { get; }
-        public Snippet SelectedItem { get; set; }
+        public ISnippet SelectedItem { get; set; }
         public bool DialogIsOpen
         {
             get { return dialogIsOpen; }
@@ -69,19 +69,24 @@ namespace PERform.Viewmodels
 
         private void InitializeCommands()
         {
-            AddSnippetCommand = new RelayCommand(AddSnippet);
+            AddSnippetCommand = new RelayCommand(AddSnippet, IsNotChildNode);
             RenameSnippetCommand = new RelayCommand(RenameSnippet);
             DeleteSnippetCommand = new RelayCommand(DeleteSnippet);
             CancelDialogCommand = new RelayCommand(CancelDialog);
             ConfirmDialogCommand = new RelayCommand(ConfirmDialog);
         }
 
+        private bool IsNotChildNode(object obj)
+        {
+            if (obj is SnippetChild)
+                return false;
+            else
+                return true;
+        }
+
         private void CancelDialog(object obj)
         {
-            DialogTextBlockText = string.Empty;
-            DialogTextBoxText = string.Empty;
-            DialogTextBoxVisibility = Visibility.Collapsed;
-            DialogIsOpen = false;
+            ClearDialog();
         }
 
         private void ConfirmDialog(object obj)
@@ -96,10 +101,11 @@ namespace PERform.Viewmodels
             }
             else if (currentDialogType == DialogType.Delete)
             {
-                // TODO
+                SnippetsManager.Remove(SelectedItem);
             }
 
             DialogIsOpen = false;
+            ClearDialog();
         }
 
         private void AddSnippet(object obj)
@@ -119,7 +125,7 @@ namespace PERform.Viewmodels
         #endregion
 
         #region Methods
-        private void ShowDialog(DialogType dialogType,Snippet selectedSnippet)
+        private void ShowDialog(DialogType dialogType, ISnippet selectedSnippet)
         {
             if (dialogType == DialogType.Add)
             {
@@ -141,6 +147,14 @@ namespace PERform.Viewmodels
             }
 
             currentDialogType = dialogType;
+        }
+
+        void ClearDialog()
+        {
+            DialogTextBlockText = string.Empty;
+            DialogTextBoxText = string.Empty;
+            DialogTextBoxVisibility = Visibility.Collapsed;
+            DialogIsOpen = false;
         }
         #endregion
     }

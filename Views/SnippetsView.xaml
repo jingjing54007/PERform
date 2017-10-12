@@ -7,17 +7,25 @@
              xmlns:behaviours="clr-namespace:PERform.Models"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:models="clr-namespace:PERform.Models"
+             xmlns:converters="clr-namespace:PERform.Utilities.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:StringLengthToBoolean x:Key="StringLengthToBoolean"/>
+        <converters:InvertBoolean x:Key="InvertBoolean"/>
+        <converters:InverVisibility x:Key="InvertVisibility"/>
+    </UserControl.Resources>
 
     <materialDesign:DialogHost IsOpen="{Binding DialogIsOpen}">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="15">
-                <TextBlock Text="{Binding DialogTextBlockText}"/>
-                <TextBox Text="{Binding DialogTextBoxText}" ToolTip="Node name" Visibility="{Binding DialogTextBoxVisibility}" Margin="0,10,0,10"/>
+                <TextBlock x:Name="DialogTextBlock" Text="{Binding DialogTextBlockText}"/>
+                <TextBox x:Name="DialogTextBox" Text="{Binding DialogTextBoxText}" ToolTip="Node name" Visibility="{Binding DialogTextBoxVisibility}" Margin="0,10,0,10"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Cancel" Command="{Binding CancelDialogCommand}" Margin="5"/>
-                    <Button Content="Confirm" Command="{Binding ConfirmDialogCommand}" Margin="5"/>
+                    <Button Content="Confirm" Command="{Binding ConfirmDialogCommand}" Margin="5" Visibility="{Binding DialogTextBoxVisibility}" IsEnabled="{Binding ElementName=DialogTextBox, Path=Text, Converter={StaticResource StringLengthToBoolean}}"/>
+                    <Button Content="Delete" Command="{Binding ConfirmDialogCommand}" Margin="5" Visibility="{Binding DialogTextBoxVisibility, Converter={StaticResource InvertVisibility}}"/>
                 </StackPanel>
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
@@ -26,17 +34,19 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="10,10,0,10">
                 <TreeView ItemsSource="{Binding SnippetsManager.SnippetsCollection}" x:Name="SnippetTree" Height="Auto">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate  DataType="{x:Type models:SnippetParent}" ItemsSource="{Binding Childrens}">
+                            <TextBlock Text="{Binding Header}"/>
+                        </HierarchicalDataTemplate>
+                        <HierarchicalDataTemplate  DataType="{x:Type models:SnippetChild}">
+                            <TextBlock Text="{Binding Header}"/>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
                     <i:Interaction.Behaviors>
                         <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
                     </i:Interaction.Behaviors>
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Snippets}" DataType="{x:Type models:Snippet}">
-                            <TextBlock Text="{Binding Header}"/>
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
 
                     <TreeView.ContextMenu>
                         <ContextMenu>
@@ -57,19 +67,19 @@
                             </MenuItem>
                         </ContextMenu>
                     </TreeView.ContextMenu>
-                    <!--items-->
                 </TreeView>
-                
             </ScrollViewer>
             <ContentControl Content="{Binding SelectedItem, ElementName=SnippetTree}" Grid.Column="1">
                 <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type models:Snippet}">
+                    <DataTemplate DataType="{x:Type models:SnippetParent}">
+                        <ContentControl Content="{Binding PerEditor}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type models:SnippetChild}">
                         <ContentControl Content="{Binding PerEditor}"/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
-
     </materialDesign:DialogHost>
 
 </UserControl>

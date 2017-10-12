@@ -66,14 +66,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\BindableSelectedItemBehavior.cs" />
+    <Compile Include="Utilities\BindableSelectedItemBehavior.cs" />
     <Compile Include="Models\FileSelector.cs" />
-    <Compile Include="Models\Notifier.cs" />
+    <Compile Include="Models\Interfaces\ISnippet.cs" />
+    <Compile Include="Utilities\Converters\InvertBoolean.cs" />
+    <Compile Include="Utilities\Converters\InverVisibility.cs" />
+    <Compile Include="Utilities\Converters\StringLengthToBoolean.cs" />
+    <Compile Include="Utilities\Notifier.cs" />
     <Compile Include="Models\PEREditor.cs" />
-    <Compile Include="Models\RelayCommand.cs" />
-    <Compile Include="Models\Snippet.cs" />
+    <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="Models\SnippetChild.cs" />
+    <Compile Include="Models\SnippetParent.cs" />
     <Compile Include="Models\SnippetsManager.cs" />
-    <Compile Include="Models\TreeViewItemHeader.cs" />
     <Compile Include="Viewmodels\HomeViewModel.cs" />
     <Compile Include="Viewmodels\MainWindowViewModel.cs" />
     <Compile Include="Viewmodels\ModifierViewModel.cs" />
