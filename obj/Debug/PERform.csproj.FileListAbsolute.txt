@@ -56,3 +56,6 @@ C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\Views\SnippetsView.baml
 C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\ICSharpCode.AvalonEdit.dll
 C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\ICSharpCode.AvalonEdit.xml
 C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Adam\Documents\GitHub\PERform\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Adam\Documents\GitHub\PERform\obj\Debug\PERform.csprojResolveAssemblyReference.cache

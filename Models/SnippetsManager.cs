@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Windows;
 
 namespace PERform.Models
 {
     public class SnippetsManager : Notifier
     {
+
         public SnippetsManager()
         {
-            SnippetsCollection = new ObservableCollection<SnippetParent>();
+            SnippetsCollection = new ObservableCollection<SnippetParent>((App.Current as App).SerializedSnippetParents);
+
+            //pass SnippetsCollection reference to app.xaml.cs so it will be serialized on 
+            //Application.Exit event (consider replacing with built-in resource file)
+            (App.Current as App).SerializedSnippetParents = SnippetsCollection;
         }
 
-        public ObservableCollection<SnippetParent> SnippetsCollection { get; set; }
+        public ObservableCollection<SnippetParent> SnippetsCollection { get; }
 
         public void Add(ISnippet snippet, string header)
         {

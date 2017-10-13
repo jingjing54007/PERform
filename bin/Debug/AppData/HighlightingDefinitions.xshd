@@ -1,0 +1,44 @@
+<SyntaxDefinition name="PERHighlighting"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <RuleSet>
+	<!-- Comments -->
+        <Span foreground="#006600" begin="//!"/>
+        <Span foreground="#006600" begin=";"/>
+
+	<!-- Groups -->
+	<Keywords foreground="#3399ff">
+	    <Word>rgroup.byte</Word>
+	    <Word>rgroup.word</Word>
+	    <Word>rgroup.tbyte</Word>
+	    <Word>rgroup.long</Word>
+	</Keywords>
+	<Keywords foreground="#FF00FF">
+	    <Word>wgroup.byte</Word>
+	    <Word>wgroup.word</Word>
+	    <Word>wgroup.tbyte</Word>
+	    <Word>wgroup.long</Word>
+	</Keywords>
+	<Keywords foreground="#ff6600">
+	    <Word>group.byte</Word>
+	    <Word>group.word</Word>
+	    <Word>group.tbyte</Word>
+	    <Word>group.long</Word>
+	</Keywords>
+
+	<!-- ifs and for -->
+        <Keywords fontWeight="bold" foreground="#FF0000">
+            <Word>if</Word>
+            <Word>else</Word>
+	    <Word>elif</Word>
+            <Word>endif</Word>
+            <Word>%if</Word>
+            <Word>%else</Word>
+	    <Word>%elif</Word>
+            <Word>%endif</Word>
+	    <Word>sif</Word>
+            <Word>%for</Word>
+            <Word>%endfor</Word>
+        </Keywords>
+
+    </RuleSet>
+</SyntaxDefinition>

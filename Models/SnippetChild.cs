@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,14 +17,15 @@ namespace PERform.Models
         #endregion
 
         #region Constructor
-        public SnippetChild()
+        [JsonConstructor] public SnippetChild(string PerEditorText = "")
         {
             PerEditor = new PEREditor()
             {
                 ShowLineNumbers = true,
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                Margin = new Thickness(10)
+                Margin = new Thickness(10),
+                Text = PerEditorText
             };
         }
         #endregion
@@ -34,7 +36,11 @@ namespace PERform.Models
             get { return header; }
             set { SetProperty(ref header, value); }
         }
-        public PEREditor PerEditor { get; }
+        public string PerEditorText
+        {
+            get { return PerEditor.Text; }
+        }
+        [JsonIgnore] public PEREditor PerEditor { get; }
         #endregion
 
         #region Methods
