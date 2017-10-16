@@ -1,8 +1,10 @@
 ﻿using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,12 @@ namespace PERform.Models
                 var definition = HighlightingLoader.Load(reader, HighlightingManager.Instance);
                 SyntaxHighlighting = definition;
             }
+        }
+
+        public void LoadTextFromFile(string path)
+        {
+            if (File.Exists(path))
+                Text = File.ReadAllText(path);
         }
     }
 }

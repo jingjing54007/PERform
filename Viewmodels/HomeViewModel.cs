@@ -8,21 +8,6 @@ namespace PERform.Viewmodels
 {
     public class HomeViewModel
     {
-        private static HomeViewModel instance;
 
-        private HomeViewModel() { }
-
-        public static HomeViewModel Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new HomeViewModel();
-                }
-
-                return instance;
-            }
-        }
     }
 }

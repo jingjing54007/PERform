@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Abstracts\Field.cs" />
     <Compile Include="Utilities\BindableSelectedItemBehavior.cs" />
     <Compile Include="Models\FileSelector.cs" />
     <Compile Include="Models\Interfaces\ISnippet.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\Interfaces\ISerializer.cs" />
     <Compile Include="Utilities\Notifier.cs" />
     <Compile Include="Models\PEREditor.cs" />
+    <Compile Include="Utilities\PATHS.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Models\SnippetChild.cs" />
     <Compile Include="Models\SnippetParent.cs" />

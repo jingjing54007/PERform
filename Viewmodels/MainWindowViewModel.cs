@@ -62,7 +62,7 @@ namespace PERform.Viewmodels
 
             if (parameter == "Modifier")
             {
-                PageContent = new ModifierView();
+                PageContent = new ModifierView(fileSelector);
             }
             else if (parameter == "Home")
             {

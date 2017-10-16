@@ -9,6 +9,8 @@ namespace PERform.Models
 {
     public class FileSelector
     {
+        public event EventHandler SelectedFileChanged;
+
         public string Path { get; private set; }
         public string Name { get; private set; }
 
@@ -29,6 +31,12 @@ namespace PERform.Models
                 Path = string.Empty;
                 Name = string.Empty;
             }
+            OnSelectedFileChanged();
+        }
+
+        private void OnSelectedFileChanged()
+        {
+            SelectedFileChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

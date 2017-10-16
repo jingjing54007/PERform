@@ -26,6 +26,15 @@
                 <DockPanel>
                     <ToggleButton x:Name="MenuToggleButton" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"/>
                     <TextBlock FontSize="22" Text="PERform" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <materialDesign:PopupBox StaysOpen="True" VerticalAlignment="Center" DockPanel.Dock="Right" PlacementMode="LeftAndAlignTopEdges">
+                        <Border Padding="10">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="Create backup of modified files" ToolTip="If checked, backup of modified files will be created and stored in Backup folder"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </materialDesign:PopupBox>
                     <TextBox Text="{Binding TextBoxText}" materialDesign:HintAssist.Hint=".ph file" materialDesign:HintAssist.IsFloating="True" Width="150" VerticalAlignment="Center" DockPanel.Dock="Right">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseDown">

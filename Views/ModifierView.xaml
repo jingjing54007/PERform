@@ -4,9 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PERform.Views"
+             xmlns:models="clr-namespace:PERform.Models"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Modifier page"/>
-    </Grid>
+
+    <Border Padding="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <ContentControl Content="{Binding PerEditor}" Margin="0,0,0.4,0.4" Grid.RowSpan="2"/>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <CheckBox Content="Uppercase lines" IsChecked="{Binding UppercaseLinesIsChecked}" ToolTip="Uppercase first letter of every word in line description"/>
+                <CheckBox Content="Lowercase fields" IsChecked="{Binding LowercaseFieldsIsChecked}" ToolTip="Lowercase first letter of every word (but first) in bitfld/eventfld/setclrfld or hexmask description"/>
+                <Button Content="Execute" Command="{Binding ExecuteCommand}" Margin="10" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

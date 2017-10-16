@@ -24,7 +24,7 @@ namespace PERform.Views
         public HomeView()
         {
             InitializeComponent();
-            DataContext = HomeViewModel.Instance;
+            DataContext = new HomeViewModel();
         }
     }
 }

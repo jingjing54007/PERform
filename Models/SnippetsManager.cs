@@ -4,22 +4,25 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Windows;
+using PERform.Utilities;
 
 namespace PERform.Models
 {
-    public class SnippetsManager : Notifier
+    public class SnippetsManager : Notifier, ISerializer
     {
 
         public SnippetsManager()
         {
-            SnippetsCollection = new ObservableCollection<SnippetParent>((App.Current as App).SerializedSnippetParents);
-
-            //pass SnippetsCollection reference to app.xaml.cs so it will be serialized on 
-            //Application.Exit event (consider replacing with built-in resource file)
-            (App.Current as App).SerializedSnippetParents = SnippetsCollection;
+            SnippetsCollection = new ObservableCollection<SnippetParent>(Deserialize(PATHS.SnippetsPath));
+            App.Current.Exit += Current_Exit;
         }
 
-        public ObservableCollection<SnippetParent> SnippetsCollection { get; }
+        private void Current_Exit(object sender, ExitEventArgs e)
+        {
+            Serialize(SnippetsCollection, PATHS.SnippetsPath);
+        }
+
+        public ObservableCollection<SnippetParent> SnippetsCollection { get; private set; }
 
         public void Add(ISnippet snippet, string header)
         {
@@ -57,6 +60,19 @@ namespace PERform.Models
                     snippetParent.Childrens.Remove(snippetChild);
                 }
             }
+        }
+
+        public void Serialize(ObservableCollection<SnippetParent> obj, string path)
+        {
+            File.WriteAllText(path, JsonConvert.SerializeObject(obj, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+        }
+
+        public ObservableCollection<SnippetParent> Deserialize(string path)
+        {
+            if (!File.Exists(path))
+                return new ObservableCollection<SnippetParent>();
+            else
+                return JsonConvert.DeserializeObject<ObservableCollection<SnippetParent>>(File.ReadAllText(path));
         }
     }
 }

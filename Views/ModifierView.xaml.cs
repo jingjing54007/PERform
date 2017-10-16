@@ -1,4 +1,5 @@
-﻿using PERform.Viewmodels;
+﻿using PERform.Models;
+using PERform.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace PERform.Views
     /// </summary>
     public partial class ModifierView : UserControl
     {
-        public ModifierView()
+        public ModifierView(FileSelector fileSelector)
         {
             InitializeComponent();
-            DataContext = ModifierViewModel.Instance;
+            DataContext = new ModifierViewModel(fileSelector);
         }
     }
 }
