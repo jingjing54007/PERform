@@ -18,7 +18,7 @@
                 <Button Content="Checker" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Checker" DockPanel.Dock="Top"/>
                 <Button Content="Parser" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="Parser" DockPanel.Dock="Top"/>
                 <Button Content="Snippets" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="Snippets" DockPanel.Dock="Top"/>
-                <Button Content="About DEV" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding PageOpen}" CommandParameter="AboutDEV" Margin="0,0,0,15" DockPanel.Dock="Bottom"/>
+                <Button Content="About DEV" Style="{DynamicResource MaterialDesignFlatButton}" IsEnabled="False" Command="{Binding PageOpen}" CommandParameter="AboutDEV" Margin="0,0,0,15" DockPanel.Dock="Bottom"/>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>

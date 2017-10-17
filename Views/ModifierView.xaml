@@ -21,9 +21,11 @@
 
             <ContentControl Content="{Binding PerEditor}" Margin="0,0,0.4,0.4" Grid.RowSpan="2"/>
             <StackPanel Grid.Column="1" Grid.Row="0">
-                <CheckBox Content="Uppercase lines" IsChecked="{Binding UppercaseLinesIsChecked}" ToolTip="Uppercase first letter of every word in line description"/>
-                <CheckBox Content="Lowercase fields" IsChecked="{Binding LowercaseFieldsIsChecked}" ToolTip="Lowercase first letter of every word (but first) in bitfld/eventfld/setclrfld or hexmask description"/>
-                <Button Content="Execute" Command="{Binding ExecuteCommand}" Margin="10" HorizontalAlignment="Center"/>
+                <CheckBox Content="Uppercase lines" IsChecked="{Binding UppercaseLinesIsChecked}" IsEnabled="{Binding CheckboxIsEnabled}" ToolTip="Uppercase first letter of every word in line description"/>
+                <CheckBox Content="Lowercase fields" IsChecked="{Binding LowercaseFieldsIsChecked}" IsEnabled="{Binding CheckboxIsEnabled}" ToolTip="Lowercase first letter of every word (but first) in bitfld/eventfld/setclrfld or hexmask description"/>
+                <CheckBox Content="Old if argument to new" IsChecked="{Binding OldNewIfIsChecked}" IsEnabled="{Binding CheckboxIsEnabled}" ToolTip="Replaces all occurances of old if argument format with new one; for example, d.b(%(1)) will be replaced with per.b(%(1))"/>
+                <CheckBox Content="Old SVN properties to new" IsChecked="{Binding OldNewSVNIsChecked}" IsEnabled="{Binding CheckboxIsEnabled}" ToolTip="Replaces old SVN properties in .ph header (multiline) with new one (one-line)"/>
+                <Button Content="Modify" Command="{Binding ModifyCommand}" Margin="10" HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Border>

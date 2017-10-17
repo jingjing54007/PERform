@@ -70,6 +70,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Abstracts\Field.cs" />
+    <Compile Include="Models\Interfaces\IField.cs" />
+    <Compile Include="Models\PRACTICE\bitfld.cs" />
+    <Compile Include="Models\PRACTICE\eventfld.cs" />
+    <Compile Include="Models\PRACTICE\group.cs" />
+    <Compile Include="Models\PRACTICE\hexmask.cs" />
+    <Compile Include="Models\PRACTICE\line.cs" />
+    <Compile Include="Models\PRACTICE\setclrfld.cs" />
+    <Compile Include="Models\PRACTICE\textfld.cs" />
+    <Compile Include="Models\PRACTICE\textline.cs" />
     <Compile Include="Utilities\BindableSelectedItemBehavior.cs" />
     <Compile Include="Models\FileSelector.cs" />
     <Compile Include="Models\Interfaces\ISnippet.cs" />
@@ -77,6 +86,7 @@
     <Compile Include="Utilities\Converters\InverVisibility.cs" />
     <Compile Include="Utilities\Converters\StringLengthToBoolean.cs" />
     <Compile Include="Models\Interfaces\ISerializer.cs" />
+    <Compile Include="Utilities\ExtensionMethods.cs" />
     <Compile Include="Utilities\Notifier.cs" />
     <Compile Include="Models\PEREditor.cs" />
     <Compile Include="Utilities\PATHS.cs" />

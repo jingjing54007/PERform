@@ -12,8 +12,8 @@ namespace PERform.Viewmodels
         #region Fields
         private FileSelector fileSelector;
         private PEREditor perEditor;
-        private bool uppercaseLinesIsChecked;
-        private bool lowercaseFieldsIsChecked;
+        private bool uppercaseLinesIsChecked, lowercaseFieldsIsChecked, oldNewIfIsChecked, oldNewSVNIsChecked;
+        private bool checkboxIsEnabled;
         #endregion
 
         #region Constructor
@@ -22,7 +22,7 @@ namespace PERform.Viewmodels
             this.fileSelector = fileSelector;
             this.fileSelector.SelectedFileChanged += FileSelector_SelectedFileChanged;
 
-            PerEditor = new PEREditor();
+            PerEditor = new PEREditor() { IsReadOnly = true };
             PerEditor.LoadTextFromFile(fileSelector.Path);
 
             InitializeCommands();
@@ -46,27 +46,66 @@ namespace PERform.Viewmodels
             get { return lowercaseFieldsIsChecked; }
             set { SetProperty(ref lowercaseFieldsIsChecked, value); }
         }
+        public bool OldNewIfIsChecked
+        {
+            get { return oldNewIfIsChecked; }
+            set { SetProperty(ref oldNewIfIsChecked, value); }
+        }
+        public bool OldNewSVNIsChecked
+        {
+            get { return oldNewSVNIsChecked; }
+            set { SetProperty(ref oldNewSVNIsChecked, value); }
+        }
+        public bool CheckBoxIsEnabled
+        {
+            set { SetProperty(ref checkboxIsEnabled, value); }
+        }
         #endregion
 
         #region Commands
-        public RelayCommand ExecuteCommand { get; set; }
+        public RelayCommand ModifyCommand { get; set; }
 
         private void InitializeCommands()
         {
-            ExecuteCommand = new RelayCommand(ExecuteModifications);
+            ModifyCommand = new RelayCommand(Modify, IsAnyCheckboxCheckedAndFileSelected);
+        }
+
+        private bool IsAnyCheckboxCheckedAndFileSelected(object obj)
+        {
+            return IsAnyCheckboxChecked(obj) && IsFileSelected(obj);
+        }
+
+        private bool IsAnyCheckboxChecked(object obj)
+        {
+            return UppercaseLinesIsChecked || LowercaseFieldsIsChecked || OldNewIfIsChecked || OldNewSVNIsChecked;
+        }
+
+        private bool IsFileSelected(object obj)
+        {
+            return !(fileSelector.Path == null || String.Equals(fileSelector?.Path, string.Empty));
         }
         #endregion
 
         #region Methods
         private void FileSelector_SelectedFileChanged(object sender, EventArgs e)
         {
-            PerEditor.LoadTextFromFile(fileSelector?.Path);
-
-            UppercaseLinesIsChecked = false;
-            LowercaseFieldsIsChecked = false;
+            if (!String.Equals(fileSelector?.Path, string.Empty))
+            {
+                PerEditor.LoadTextFromFile(fileSelector.Path);
+                CheckBoxIsEnabled = true;
+            }
+            else
+            {
+                PerEditor.Clear();
+                UppercaseLinesIsChecked = false;
+                LowercaseFieldsIsChecked = false;
+                OldNewIfIsChecked = false;
+                OldNewSVNIsChecked = false;
+                CheckBoxIsEnabled = false;
+            }
         }
 
-        private void ExecuteModifications(object obj)
+        private void Modify(object obj)
         {
             throw new NotImplementedException();
         }
