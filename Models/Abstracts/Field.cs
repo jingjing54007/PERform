@@ -4,6 +4,9 @@ using System.Linq;
 using PERform.Utilities;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using PERform.Models.Interfaces;
+using PERform.Models.PRACTICE;
 
 namespace PERform.Models.Abstracts
 {
@@ -30,27 +33,28 @@ namespace PERform.Models.Abstracts
         public int GetLongestStateLength(List<string> states) => states.OrderByDescending(s => s.Length).FirstOrDefault().Length;
         public int GetAbbreviationLength(string abbreviation) => abbreviation.Length;
 
-        public int LowercaseDescription(string fieldDescription)
+        public Tuple<string,int> LowercaseDescription(string fieldDescription)
         {
             int modificationCount = 0;
             var wordsInDescription = fieldDescription.Split(' ');
 
-            for (int i = 0; i < wordsInDescription.Length; i++)
+            for (int i = 1; i < wordsInDescription.Length; i++)
             { 
                 //if word contain upper-letter at position different than 1st, skip iteration
                 if (wordsInDescription[i].Substring(1).Any(c => char.IsUpper(c)))
                     continue;
                 else
                 {
-                    wordsInDescription[i].Substring(1).ToLower();
+                    wordsInDescription[i] = wordsInDescription[i].ToLower();
                     modificationCount++;
                 }
             }
+            var lowercasedDescription = string.Join(" ", wordsInDescription);
 
-            return modificationCount;
+            return new Tuple<string, int>(lowercasedDescription, modificationCount);
         }
 
-        public int RemoveWhitespacesFromStates(List<string> states)
+        public Tuple<List<string>,int> RemoveWhitespacesFromStates(List<string> states)
         {
             int modificationCount = 0;
             foreach (var state in states)
@@ -61,7 +65,7 @@ namespace PERform.Models.Abstracts
                     modificationCount++;
                 }
             }
-            return modificationCount;
+            return new Tuple<List<string>, int>(states, modificationCount);
         }
 
         public bool CheckIfPositionExceedSize(FieldSize fieldSize, int position)
@@ -83,9 +87,9 @@ namespace PERform.Models.Abstracts
             }
         }
 
-        public FieldSize GetFieldSize(string line)
+        public FieldSize GetSize(string line)
         {
-            var indexOfFirstDot = line.IndexOf('.');
+            var indexOfFirstDot = line.IndexOf('.') + 1;
             var indexOfSpace = line.IndexOf(' ', indexOfFirstDot);
             var length = indexOfSpace - indexOfFirstDot;
             var fieldSizeString = line.Substring(indexOfFirstDot, length).ToLower();
@@ -107,19 +111,46 @@ namespace PERform.Models.Abstracts
             }
         }
 
-        public string GetFieldDescription(string line)
+        public int GetOffset(string line)
         {
-            var indexOfFirstComa = line.IndexOf(',');
-            var indexOfClosingQuotationMark = line.IndexOf('"', indexOfFirstComa);
-            var length = indexOfClosingQuotationMark - indexOfFirstComa;
-            var fieldDescriptionString = line.Substring(indexOfFirstComa, length);
+            var indexOfFirstNumber = line.IndexOfAny("0123456789".ToCharArray());
+            var indexOfSpace = line.IndexOf(' ', indexOfFirstNumber);
+            var length = indexOfSpace - indexOfFirstNumber;
+            var offset = Convert.ToInt32(line.Substring(indexOfFirstNumber, length), 16);
 
-            return fieldDescriptionString;
+            return offset;
         }
 
-        public List<string> GetFieldStates(string line)
+        public Tuple<int,int?> GetPosition(string line)
         {
-            var indexOfStatesOpenQuotationMark = line.GetNthIndex('"', 3);
+            Regex.Match(line, @"(\d+\.)(--\d+\d)?");
+
+            return null;
+        }
+
+        public string GetAbbreviation(string line)
+        {
+            var indexOfFirstQuotationMark = line.IndexOf('"') + 1;
+            var indexOfFirstComa = line.IndexOf(",", indexOfFirstQuotationMark);
+            var length = indexOfFirstComa - indexOfFirstQuotationMark;
+            var abbreviation = line.Substring(indexOfFirstQuotationMark, length);
+
+            return abbreviation;
+        }
+
+        public string GetDescription(string line)
+        {
+            var indexOfFirstComa = line.IndexOf(',') + 1;
+            var indexOfClosingQuotationMark = line.IndexOf('"', indexOfFirstComa);
+            var length = indexOfClosingQuotationMark - indexOfFirstComa;
+            var description = line.Substring(indexOfFirstComa, length);
+
+            return description;
+        }
+
+        public List<string> GetStates(string line)
+        {
+            var indexOfStatesOpenQuotationMark = line.GetNthIndex('"', 3) + 1;
             var indexOfStatesClosingQuotationMark = line.IndexOf('"', indexOfStatesOpenQuotationMark);
             var length = indexOfStatesClosingQuotationMark - indexOfStatesOpenQuotationMark;
             var statesString = line.Substring(indexOfStatesOpenQuotationMark, length);
@@ -127,6 +158,20 @@ namespace PERform.Models.Abstracts
             var statesList = statesString.Split(',').ToList();
 
             return statesList;
+        }
+
+        public string GetString(IField field)
+        {
+            var returnString = string.Empty;
+
+            if (field.GetType() == typeof(Bitfld))
+            {
+                returnString = field.FieldType.ToString() + "." + field.FieldSize.ToString() + " 0x" + field.Offset.ToString("X")
+                    + " " + field.Position.ToString() + ". \"" + field.Abbreviation + "," + field.Description + "\" \"" +
+                    string.Join(",", field.States) + "\"";
+            }
+
+            return returnString;
         }
         #endregion
     }

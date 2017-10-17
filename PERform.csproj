@@ -71,14 +71,18 @@
     </ApplicationDefinition>
     <Compile Include="Models\Abstracts\Field.cs" />
     <Compile Include="Models\Interfaces\IField.cs" />
-    <Compile Include="Models\PRACTICE\bitfld.cs" />
-    <Compile Include="Models\PRACTICE\eventfld.cs" />
+    <Compile Include="Models\Interfaces\IPRACTICE.cs" />
+    <Compile Include="Models\PRACTICE\Bitfld.cs" />
+    <Compile Include="Models\PRACTICE\Comment.cs" />
+    <Compile Include="Models\PRACTICE\Eventfld.cs" />
     <Compile Include="Models\PRACTICE\group.cs" />
     <Compile Include="Models\PRACTICE\hexmask.cs" />
     <Compile Include="Models\PRACTICE\line.cs" />
-    <Compile Include="Models\PRACTICE\setclrfld.cs" />
+    <Compile Include="Models\PRACTICE\Setclrfld.cs" />
     <Compile Include="Models\PRACTICE\textfld.cs" />
     <Compile Include="Models\PRACTICE\textline.cs" />
+    <Compile Include="Models\PRACTICE\UNDEFINED.cs" />
+    <Compile Include="Models\Program.cs" />
     <Compile Include="Utilities\BindableSelectedItemBehavior.cs" />
     <Compile Include="Models\FileSelector.cs" />
     <Compile Include="Models\Interfaces\ISnippet.cs" />

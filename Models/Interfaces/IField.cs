@@ -14,9 +14,15 @@ namespace PERform.Models.Interfaces
         FieldSize FieldSize { get; }
         int Offset { get; }
         int Position { get; }
+        int FieldRange { get; }
         string Abbreviation { get; }
         string Description { get; }
         List<string> States { get; }
+        #endregion
+
+        #region Methods
+        void SetDescription(string description);
+        void SetStates(List<string> states);
         #endregion
     }
 }

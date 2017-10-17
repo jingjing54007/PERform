@@ -1,4 +1,5 @@
 ﻿using PERform.Models;
+using PERform.Models.PRACTICE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,7 @@ namespace PERform.Viewmodels
         {
             set { SetProperty(ref checkboxIsEnabled, value); }
         }
+        public Program Program { get; private set; }
         #endregion
 
         #region Commands
@@ -92,11 +94,13 @@ namespace PERform.Viewmodels
             if (!String.Equals(fileSelector?.Path, string.Empty))
             {
                 PerEditor.LoadTextFromFile(fileSelector.Path);
+                Program = new Program(fileSelector.Lines);
                 CheckBoxIsEnabled = true;
             }
             else
             {
                 PerEditor.Clear();
+                Program = null;
                 UppercaseLinesIsChecked = false;
                 LowercaseFieldsIsChecked = false;
                 OldNewIfIsChecked = false;
@@ -107,7 +111,10 @@ namespace PERform.Viewmodels
 
         private void Modify(object obj)
         {
-            throw new NotImplementedException();
+            if (LowercaseFieldsIsChecked)
+                Program.LowercaseFields();
+
+            PerEditor.Text = string.Join(Environment.NewLine, Program.LinesRawString);
         }
         #endregion
     }
