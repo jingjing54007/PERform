@@ -12,14 +12,18 @@ namespace PERform.Models.Abstracts
 {
     public enum FieldType
     {
-        UNDETERMINED,
+        UNDEFINED,
         BITFLD,
+        RBITFLD,
         EVENTFLD,
-        SETCLRFLD
+        SETCLRFLD,
+        HEXMASK,
+        LINE,
+        GROUP
     }
     public enum FieldSize
     {
-        UNDETERMINED,
+        UNDEFINED,
         BYTE,
         WORD,
         TBYTE,
@@ -29,6 +33,24 @@ namespace PERform.Models.Abstracts
 
     abstract partial class Field
     {
+        #region Properties
+        public string IndentationPattern => @"(?<INDENTATION>\s*)";
+        public string FieldTypePattern => @"(?<FIELDTYPE>\w+)\.";
+        public string FieldSizePattern => @"(?<FIELDSIZE>\w+)";
+        public string InnerFieldSizePattern => @"(\.(?<INNERFIELDSIZE>\w+))?";
+        public string OffsetPattern => @"\s+(?<MINUS>-?)?(?<OFFSET>(0x|0X)[a-fA-F0-9]+)";
+        public string OffsetSetPattern => @"\s+(?<MINUSSET>-?)?(?<OFFSETSET>(0x|0X)[a-fA-F0-9]+)";
+        public string OffsetClearPattern => @"\s+(?<MINUSCLEAR>-?)?(?<OFFSETCLEAR>(0x|0X)[a-fA-F0-9]+)";
+        public string FirstPositionPattern => @"\s+(?<FIRSTPOSITION>\d+)\.";
+        public string SecondPositionPattern => @"(--(?<SECONDPOSITION>\d+).)?";
+        public string PositionSetPattern => @"\s+(?<POSITIONSET>\d+)\.";
+        public string PositionClearPattern => @"\s+(?<POSITIONCLEAR>\d+)\.";
+        public string MultiplierPattern => @"(\s+(?<MULTIPLIER>\d+)\.)?";
+        public string AbbreviationPattern => "\\s+\"(?<ABBREVIATION>[^,].+?),";
+        public string DescriptionPattern => "(?<DESCRIPTION>.+?)\"";
+        public string StatesPattern => "\\s+\"(?<STATES>.+)\"";
+        #endregion
+
         #region Methods
         public int GetLongestStateLength(List<string> states) => states.OrderByDescending(s => s.Length).FirstOrDefault().Length;
         public int GetAbbreviationLength(string abbreviation) => abbreviation.Length;
@@ -57,11 +79,12 @@ namespace PERform.Models.Abstracts
         public Tuple<List<string>,int> RemoveWhitespacesFromStates(List<string> states)
         {
             int modificationCount = 0;
-            foreach (var state in states)
+            for (int i = 0; i < states.Count; i++)
             {
-                if (char.IsWhiteSpace(state[0]) || char.IsWhiteSpace(state[state.Length]))
+                var stateArray = states[i].ToCharArray();
+                if (char.IsWhiteSpace(stateArray[0]) || char.IsWhiteSpace(stateArray[stateArray.Length - 1]))
                 {
-                    state.Trim();
+                    states[i] = states[i].Trim();
                     modificationCount++;
                 }
             }
@@ -87,14 +110,9 @@ namespace PERform.Models.Abstracts
             }
         }
 
-        public FieldSize GetSize(string line)
+        public FieldSize StringToFieldSize(string line)
         {
-            var indexOfFirstDot = line.IndexOf('.') + 1;
-            var indexOfSpace = line.IndexOf(' ', indexOfFirstDot);
-            var length = indexOfSpace - indexOfFirstDot;
-            var fieldSizeString = line.Substring(indexOfFirstDot, length).ToLower();
-
-            switch (fieldSizeString)
+            switch (line.ToLower())
             {
                 case "byte":
                     return FieldSize.BYTE;
@@ -107,68 +125,26 @@ namespace PERform.Models.Abstracts
                 case "quad":
                     return FieldSize.QUAD;
                 default:
-                    return FieldSize.UNDETERMINED;
+                    return FieldSize.UNDEFINED;
             }
-        }
-
-        public int GetOffset(string line)
-        {
-            var indexOfFirstNumber = line.IndexOfAny("0123456789".ToCharArray());
-            var indexOfSpace = line.IndexOf(' ', indexOfFirstNumber);
-            var length = indexOfSpace - indexOfFirstNumber;
-            var offset = Convert.ToInt32(line.Substring(indexOfFirstNumber, length), 16);
-
-            return offset;
-        }
-
-        public Tuple<int,int?> GetPosition(string line)
-        {
-            Regex.Match(line, @"(\d+\.)(--\d+\d)?");
-
-            return null;
-        }
-
-        public string GetAbbreviation(string line)
-        {
-            var indexOfFirstQuotationMark = line.IndexOf('"') + 1;
-            var indexOfFirstComa = line.IndexOf(",", indexOfFirstQuotationMark);
-            var length = indexOfFirstComa - indexOfFirstQuotationMark;
-            var abbreviation = line.Substring(indexOfFirstQuotationMark, length);
-
-            return abbreviation;
-        }
-
-        public string GetDescription(string line)
-        {
-            var indexOfFirstComa = line.IndexOf(',') + 1;
-            var indexOfClosingQuotationMark = line.IndexOf('"', indexOfFirstComa);
-            var length = indexOfClosingQuotationMark - indexOfFirstComa;
-            var description = line.Substring(indexOfFirstComa, length);
-
-            return description;
-        }
-
-        public List<string> GetStates(string line)
-        {
-            var indexOfStatesOpenQuotationMark = line.GetNthIndex('"', 3) + 1;
-            var indexOfStatesClosingQuotationMark = line.IndexOf('"', indexOfStatesOpenQuotationMark);
-            var length = indexOfStatesClosingQuotationMark - indexOfStatesOpenQuotationMark;
-            var statesString = line.Substring(indexOfStatesOpenQuotationMark, length);
-
-            var statesList = statesString.Split(',').ToList();
-
-            return statesList;
         }
 
         public string GetString(IField field)
         {
             var returnString = string.Empty;
 
-            if (field.GetType() == typeof(Bitfld))
+            if (field.GetType() == typeof(Bitfld) || field.GetType() == typeof(Eventfld))
             {
-                returnString = field.FieldType.ToString() + "." + field.FieldSize.ToString() + " 0x" + field.Offset.ToString("X")
-                    + " " + field.Position.ToString() + ". \"" + field.Abbreviation + "," + field.Description + "\" \"" +
-                    string.Join(",", field.States) + "\"";
+                returnString += field.Indentation + field.FieldType.ToString().ToLower() + "." + field.FieldSize.ToString().ToLower() +
+                     " 0x" + field.Offset.ToString("X") + " " + field.Position.Item1.ToString() + ".";
+
+                if (field.Position.Item2 != null)
+                {
+                    returnString += "--" + field.Position.Item2.ToString() + ".";
+                }
+
+                returnString += " \"" + field.Abbreviation + "," +
+                     field.Description + "\" \"" + string.Join(",", field.States) + "\"";
             }
 
             return returnString;

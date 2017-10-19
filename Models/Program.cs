@@ -1,4 +1,5 @@
-﻿using PERform.Models.Interfaces;
+﻿using PERform.Models.Abstracts;
+using PERform.Models.Interfaces;
 using PERform.Models.PRACTICE;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,34 @@ namespace PERform.Models
             Lines = new List<IPRACTICE>();
             LinesRawString = programLines;
 
-            var bitfldPattern = @"\s*bitfld.(byte|word|tbyte|long|quad)\s*\d+";
-            var eventfldPattern = @"\s*eventfld.(byte|word|tbyte|long|quad)\s*\d+";
-            var setclrfldPattern = @"\s*setclrfld.(byte|word|tbyte|long|quad)\s*\d+";
+            //var groupPattern = @"\s*(r|w)?group.(byte|word|tbyte|long|quad)\s*-?\d+";
+            var linePattern = @"\s*line.(byte|word|tbyte|long|quad)\s*-?\d+";
+            var bitfldPattern = @"\s*(r)?bitfld.(byte|word|tbyte|long|quad)\s*-?\d+";
+            var eventfldPattern = @"\s*eventfld.(byte|word|tbyte|long|quad)\s*-?\d+";
+            var setclrfldPattern = @"\s*setclrfld.(byte|word|tbyte|long|quad)\s*-?\d+";
+            var hexmaskPattern = @"\s*hexmask.(byte|word|tbyte|long|quad)(\.byte|\.word|\.tbyte|\.long|\.quad)?\s*-?\d+";
 
             foreach (var programLine in programLines)
             {
-                if (Regex.IsMatch(programLine, bitfldPattern))
+                if (Regex.IsMatch(programLine, linePattern))
+                {
+                    Lines.Add(new Line(programLine));
+                }
+                else if (Regex.IsMatch(programLine, bitfldPattern))
                 {
                     Lines.Add(new Bitfld(programLine));
+                }
+                else if (Regex.IsMatch(programLine, eventfldPattern))
+                {
+                    Lines.Add(new Eventfld(programLine));
+                }
+                else if (Regex.IsMatch(programLine, setclrfldPattern))
+                {
+                    Lines.Add(new Setclrfld(programLine));
+                }
+                else if (Regex.IsMatch(programLine, hexmaskPattern))
+                {
+                    Lines.Add(new Hexmask(programLine));
                 }
                 else
                 {
@@ -41,10 +61,34 @@ namespace PERform.Models
         {
             foreach (var line in Lines)
             {
+                if (line.GetType().GetInterfaces().Contains(typeof(IField)))
+                {
+                    var field = line as IField;
+                    field.SetDescription(field.LowercaseDescription(field.Description).Item1);
+                }
+            }
+            UpdateLinesRawString();
+            return 0;
+        }
+
+        public int RemoveWhitespaces()
+        {
+            foreach (var line in Lines)
+            {
                 if (line.GetType() == typeof(Bitfld))
                 {
                     var bitfld = line as Bitfld;
-                    bitfld.SetDescription(bitfld.LowercaseDescription(bitfld.Description).Item1);
+                    bitfld.SetStates(bitfld.RemoveWhitespacesFromStates(bitfld.States).Item1);
+                }
+                else if (line.GetType() == typeof(Eventfld))
+                {
+                    var eventfld = line as Eventfld;
+                    eventfld.SetStates(eventfld.RemoveWhitespacesFromStates(eventfld.States).Item1);
+                }
+                else if (line.GetType() == typeof(Setclrfld))
+                {
+                    var setclrfld = line as Setclrfld;
+                    setclrfld.SetStates(setclrfld.RemoveWhitespacesFromStates(setclrfld.States).Item1);
                 }
             }
             UpdateLinesRawString();
@@ -55,15 +99,17 @@ namespace PERform.Models
         {
             for (int i = 0; i < Lines.Count; i++)
             {
-                if (Lines[i].GetType() == typeof(Bitfld))
+                if (Lines[i].GetType().GetInterfaces().Contains(typeof(IField)))
                 {
-                    var bitfld = Lines[i] as Bitfld;
-                    LinesRawString[i] = bitfld.GetString(bitfld);
+                    LinesRawString[i] = (Lines[i] as IField).GetString();
+                }
+                else if (Lines[i].GetType() == typeof(Line))
+                {
+                    LinesRawString[i] = (Lines[i] as Line).GetString();
                 }
                 else
                 {
-                    var undefined = Lines[i] as UNDEFINED;
-                    LinesRawString[i] = undefined.GetString();
+                    LinesRawString[i] = (Lines[i] as UNDEFINED).GetString();
                 }
             }
         }

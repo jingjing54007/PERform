@@ -1,0 +1,97 @@
+<SyntaxDefinition name="PERHighlighting"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <RuleSet>
+	<!-- Comments -->
+        <Span foreground="#006600" begin="//!"/>
+        <Span foreground="#006600" begin=";"/>
+
+	<!-- Groups -->
+	<Keywords foreground="#3399FF">
+	    <Word>rgroup.byte</Word>
+	    <Word>rgroup.word</Word>
+	    <Word>rgroup.tbyte</Word>
+	    <Word>rgroup.long</Word>
+	</Keywords>
+	<Keywords foreground="#FF00FF">
+	    <Word>wgroup.byte</Word>
+	    <Word>wgroup.word</Word>
+	    <Word>wgroup.tbyte</Word>
+	    <Word>wgroup.long</Word>
+	</Keywords>
+	<Keywords foreground="#FF6600">
+	    <Word>group.byte</Word>
+	    <Word>group.word</Word>
+	    <Word>group.tbyte</Word>
+	    <Word>group.long</Word>
+	</Keywords>
+	<Keywords foreground="#FF0000">
+	    <Word>hgroup.byte</Word>
+	    <Word>hgroup.word</Word>
+	    <Word>hgroup.tbyte</Word>
+	    <Word>hgroup.long</Word>
+	</Keywords>
+
+	<!-- Fields -->
+	<Keywords foreground="#3399FF">
+	    <Word>rbitfld.byte</Word>
+	    <Word>rbitfld.word</Word>
+	    <Word>rbitfld.tbyte</Word>
+	    <Word>rbitfld.long</Word>
+	</Keywords>
+	<Keywords foreground="#FF6600">
+	    <Word>bitfld.byte</Word>
+	    <Word>bitfld.word</Word>
+	    <Word>bitfld.tbyte</Word>
+	    <Word>bitfld.long</Word>
+	    <Word>eventfld.byte</Word>
+	    <Word>eventfld.word</Word>
+	    <Word>eventfld.tbyte</Word>
+	    <Word>eventfld.long</Word>
+	    <Word>setclrfld.byte</Word>
+	    <Word>setclrfld.word</Word>
+	    <Word>setclrfld.tbyte</Word>
+	    <Word>setclrfld.long</Word>
+	    <Word>hexmask.byte</Word>
+	    <Word>hexmask.word</Word>
+	    <Word>hexmask.word.byte</Word>
+	    <Word>hexmask.tbyte</Word>
+	    <Word>hexmask.tbyte.word</Word>
+	    <Word>hexmask.tbyte.byte</Word>
+	    <Word>hexmask.long</Word>
+	    <Word>hexmask.long.tbyte</Word>
+	    <Word>hexmask.long.word</Word>
+	    <Word>hexmask.long.byte</Word>
+	</Keywords>
+
+	<!-- ifs and for -->
+        <Keywords fontWeight="bold" foreground="#FF0000">
+            <Word>if</Word>
+            <Word>else</Word>
+	    <Word>elif</Word>
+            <Word>endif</Word>
+            <Word>%if</Word>
+            <Word>%else</Word>
+	    <Word>%elif</Word>
+            <Word>%endif</Word>
+	    <Word>sif</Word>
+            <Word>%for</Word>
+            <Word>%endfor</Word>
+        </Keywords>
+
+	<!-- base, include etc. -->
+	<Keywords fontWeight="bold" foreground="#FF0000">
+	    <Word>%base</Word>
+	    <Word>%include</Word>
+	</Keywords>
+
+        <!-- Digits -->
+        <Rule fontWeight="bold">
+            \b0[xX][0-9a-fA-F]+  # hex number
+        |    \b
+            (    \d+(\.[0-9]+)?   #number with optional floating point
+            |    \.[0-9]+         #or just starting with floating point
+            )
+            ([eE][+-]?[0-9]+)? # optional exponent
+        </Rule>
+    </RuleSet>
+</SyntaxDefinition>

@@ -1,4 +1,5 @@
 ﻿using PERform.Models;
+using PERform.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -66,6 +67,7 @@ namespace PERform.Viewmodels
         public RelayCommand DeleteSnippetCommand { get; set; }
         public RelayCommand CancelDialogCommand { get; set; }
         public RelayCommand ConfirmDialogCommand { get; set; }
+        public RelayCommand UnloadedCommand { get; set; }
 
         private void InitializeCommands()
         {
@@ -74,6 +76,12 @@ namespace PERform.Viewmodels
             DeleteSnippetCommand = new RelayCommand(DeleteSnippet);
             CancelDialogCommand = new RelayCommand(CancelDialog);
             ConfirmDialogCommand = new RelayCommand(ConfirmDialog);
+            UnloadedCommand = new RelayCommand(Unloaded);
+        }
+
+        private void Unloaded(object obj)
+        {
+            SnippetsManager.Serialize(SnippetsManager.SnippetsCollection, PATHS.SnippetsPath);
         }
 
         private bool IsNotChildNode(object obj)

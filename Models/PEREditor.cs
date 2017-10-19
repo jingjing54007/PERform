@@ -2,6 +2,7 @@
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+using PERform.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +27,7 @@ namespace PERform.Models
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             ShowLineNumbers = true;
             SyntaxHighlighting = null;
-            using (var reader = new XmlTextReader("AppData/HighlightingDefinitions.xshd"))
+            using (var reader = new XmlTextReader(PATHS.HighlightingPath))
             {
                 var definition = HighlightingLoader.Load(reader, HighlightingManager.Instance);
                 SyntaxHighlighting = definition;

@@ -13,7 +13,7 @@ namespace PERform.Viewmodels
         #region Fields
         private FileSelector fileSelector;
         private PEREditor perEditor;
-        private bool uppercaseLinesIsChecked, lowercaseFieldsIsChecked, oldNewIfIsChecked, oldNewSVNIsChecked;
+        private bool uppercaseLinesIsChecked, lowercaseFieldsIsChecked, removeWhitespacesIsChecked, oldNewIfIsChecked, oldNewSVNIsChecked;
         private bool checkboxIsEnabled;
         #endregion
 
@@ -24,7 +24,12 @@ namespace PERform.Viewmodels
             this.fileSelector.SelectedFileChanged += FileSelector_SelectedFileChanged;
 
             PerEditor = new PEREditor() { IsReadOnly = true };
-            PerEditor.LoadTextFromFile(fileSelector.Path);
+
+            if (fileSelector.Path != null)
+            {
+                PerEditor.LoadTextFromFile(fileSelector.Path);
+                Program = new Program(fileSelector.Lines);
+            }
 
             InitializeCommands();
         }
@@ -46,6 +51,11 @@ namespace PERform.Viewmodels
         {
             get { return lowercaseFieldsIsChecked; }
             set { SetProperty(ref lowercaseFieldsIsChecked, value); }
+        }
+        public bool RemoveWhitespacesIsChecked
+        {
+            get { return removeWhitespacesIsChecked; }
+            set { SetProperty(ref removeWhitespacesIsChecked, value); }
         }
         public bool OldNewIfIsChecked
         {
@@ -79,7 +89,7 @@ namespace PERform.Viewmodels
 
         private bool IsAnyCheckboxChecked(object obj)
         {
-            return UppercaseLinesIsChecked || LowercaseFieldsIsChecked || OldNewIfIsChecked || OldNewSVNIsChecked;
+            return UppercaseLinesIsChecked || LowercaseFieldsIsChecked || RemoveWhitespacesIsChecked || OldNewIfIsChecked || OldNewSVNIsChecked;
         }
 
         private bool IsFileSelected(object obj)
@@ -103,6 +113,7 @@ namespace PERform.Viewmodels
                 Program = null;
                 UppercaseLinesIsChecked = false;
                 LowercaseFieldsIsChecked = false;
+                RemoveWhitespacesIsChecked = false;
                 OldNewIfIsChecked = false;
                 OldNewSVNIsChecked = false;
                 CheckBoxIsEnabled = false;
@@ -113,6 +124,9 @@ namespace PERform.Viewmodels
         {
             if (LowercaseFieldsIsChecked)
                 Program.LowercaseFields();
+
+            if (RemoveWhitespacesIsChecked)
+                Program.RemoveWhitespaces();
 
             PerEditor.Text = string.Join(Environment.NewLine, Program.LinesRawString);
         }

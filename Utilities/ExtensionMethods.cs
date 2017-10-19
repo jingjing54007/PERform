@@ -28,5 +28,19 @@ namespace PERform.Utilities
             }
             return -1;
         }
+
+        /// <summary>
+        /// Returns null for non-parsable strings or *value* for parsable
+        /// </summary>
+        /// <param name="input">Input string</param>
+        /// <returns>Null/*number*</returns>
+        public static int? ToNullableInt(this string input)
+        {
+            int i;
+            if (int.TryParse(input, out i))
+                return i;
+            else
+                return null;
+        }
     }
 }

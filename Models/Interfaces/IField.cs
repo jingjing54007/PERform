@@ -10,11 +10,11 @@ namespace PERform.Models.Interfaces
     public interface IField
     {
         #region Properties
+        string Indentation { get; }
         FieldType FieldType { get; }
         FieldSize FieldSize { get; }
         int Offset { get; }
-        int Position { get; }
-        int FieldRange { get; }
+        Tuple<int,int?> Position { get; }
         string Abbreviation { get; }
         string Description { get; }
         List<string> States { get; }
@@ -22,7 +22,8 @@ namespace PERform.Models.Interfaces
 
         #region Methods
         void SetDescription(string description);
-        void SetStates(List<string> states);
+        string GetString();
+        Tuple<string, int> LowercaseDescription(string fieldDescription);
         #endregion
     }
 }
